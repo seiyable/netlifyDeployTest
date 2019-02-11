@@ -24,6 +24,11 @@
           GitHub
         </a>
       </div>
+      <ul class="env-var-list">
+        <li>NODE_ENV: {{ nodeEnv }}</li>
+        <li>NODE_VERSION: {{ nodeVersion }}</li>
+        <li>MY_VALUE: {{ myValue }}</li>
+      </ul>
     </div>
   </section>
 </template>
@@ -34,6 +39,18 @@ import Logo from '~/components/Logo.vue'
 export default {
   components: {
     Logo
+  },
+  data() {
+    return {
+      nodeEnv: '',
+      nodeVersion: '',
+      myValue: ''
+    }
+  },
+  created() {
+    this.nodeEnv = process.env.NODE_ENV
+    this.nodeVersion = process.env.NODE_VERSION
+    this.myValue = process.env.MY_VALUE
   }
 }
 </script>
@@ -68,5 +85,11 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+
+.env-var-list {
+  margin: 20px auto;
+  width: 500px;
+  text-align: left;
 }
 </style>
