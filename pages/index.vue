@@ -29,12 +29,26 @@
         <li>NODE_VERSION: {{ nodeVersion }}</li>
         <li>MY_VALUE: {{ myValue }}</li>
       </ul>
+      <ul class="contentful">
+        <li
+          v-for="(entry, index) in entries"
+          :key="index"
+        >
+          {{ entry }}
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import { createClient } from 'contentful'
+const client = createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken:
+    process.env.CONTENTFUL_CDAPI_ACCESS_TOKEN
+})
 
 export default {
   components: {
@@ -44,13 +58,23 @@ export default {
     return {
       nodeEnv: '',
       nodeVersion: '',
-      myValue: ''
+      myValue: '',
+      entries: [],
+      error: ''
     }
   },
   created() {
     this.nodeEnv = process.env.NODE_ENV
     this.nodeVersion = process.env.NODE_VERSION
     this.myValue = process.env.MY_VALUE
+
+    client.getEntries()
+      .then((response) => {
+        this.entries = response.items
+      })
+      .catch((error) => {
+        this.error = error
+      })
   }
 }
 </script>

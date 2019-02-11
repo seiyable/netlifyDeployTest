@@ -73,6 +73,8 @@ module.exports = {
 
   env: {
     NODE_VERSION: process.env.NODE_VERSION,
-    MY_VALUE: process.env.MY_VALUE || 'No value is set'
+    MY_VALUE: process.env.MY_VALUE || 'No value is set',
+    CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
+    CONTENTFUL_CDAPI_ACCESS_TOKEN: process.env.CONTENTFUL_CDAPI_ACCESS_TOKEN
   }
 }
