@@ -69,5 +69,10 @@ module.exports = {
         })
       }
     }
+  },
+
+  env: {
+    NODE_VERSION: process.env.NODE_VERSION,
+    MY_VALUE: process.env.MY_VALUE || 'No value is set'
   }
 }
