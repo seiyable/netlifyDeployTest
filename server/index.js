@@ -4,8 +4,16 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
 // Import and Set Nuxt.js options
-const config = require('../nuxt.config.js')
+let config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
+
+// overwrite environment variables for dev
+if (config.dev) {
+  require('dotenv').config()
+  config.env.CONTENTFUL_SPACE_ID = process.env.CONTENTFUL_SPACE_ID
+  config.env.CONTENTFUL_CDAPI_ACCESS_TOKEN =
+    process.env.CONTENTFUL_CDAPI_ACCESS_TOKEN
+}
 
 async function start() {
   // Init Nuxt.js
